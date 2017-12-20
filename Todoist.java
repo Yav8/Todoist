@@ -12,16 +12,15 @@ public class Todoist {
      */
     public Todoist() {
         tareas = new ArrayList<String>();
-        tareaCompletada = new ArrayList<String>();
     }
-    
+
     /**
      * Inserta una nueva tarea
      */
     public void addTarea(String nombreTarea) {
         tareas.add(nombreTarea);
     }
-    
+
     /**
      * Muestra por pantalla todas las tareas existentes
      */
@@ -29,21 +28,21 @@ public class Todoist {
         System.out.println("Tareas existentes");
         System.out.println(tareas);
     }
-    
+
     /**
      * Devuelve el numero de tareas existentes
      */
     public int getNumeroDeTareasPendientes() {
         return tareas.size();
     }
-    
+
     /**
      * Imprime por pantalla el numero de tareas pendientes
      */
     public void mostrarNumeroTareasPendientes() {
         System.out.println(tareas.size());
     }
-    
+
     /**
      * Elimina la tarea que ocupa la posicion indicada como
      * parametro (empezando en 0). Devuelve true si elimina una 
@@ -57,7 +56,7 @@ public class Todoist {
         }
         return valorADevolver;
     }
-    
+
     /**
      * Metodo que comprueba si una posicion es valida y devuelve true
      * en caso afirmativo o false en otro caso.
@@ -69,7 +68,7 @@ public class Todoist {
         }
         return valorADevolver;
     }
-    
+
     /**
      * Metodo que devuelve true en caso de que haya tareas por hacer, 
      * false en otro caso
@@ -81,38 +80,42 @@ public class Todoist {
         }
         return valorADevolver;
     }
-    
+
     /**
      * Lo mismo que el metodo hayTareasPendientes pero resuelto en una linea
      */
     public boolean haTareasPendientes() {
         return (getNumeroDeTareasPendientes() > 0);
     }
-    
+
     /**
      * Lo mismo que el metodo esValidoElIndice pero resuelto en una linea
      */
     public boolean esValidoElIndic(int indic) {
         return (indic >= 0 && indic < getNumeroDeTareasPendientes());
     }
-    
+
     /**
      * Metodo que imprime todas las tareas existentes, una por linea.
      * El metodo imprime el numero de posicion de la tarea antes del
      * nombre de la tarea. Si la tarea está completada, entonces muestra
      * un "[X]" delante de la tarea; si no está completada muestra un "[ ]"
      */
-    public void mostrarTareasNumeradas() {
+    public void mostrarTareasNumeradas()
+    {
         int numeroPosicion = 1;
-        // bucle que permite mostrarnos todas las tareas que hemos creado
-        int contador = 0;
-        for(String tarea : tareas) {
-            System.out.println(numeroPosicion + ". " + tareaCompletada);
+        for (String tarea : tareas){
+            if (tarea.substring(0,1).equals("$")) {
+                System.out.println(numeroPosicion + ". [X] " + tarea.substring(1, tarea.length()));                
+            }
+            else {
+                System.out.println(numeroPosicion + ". [ ] " + tarea);                 
+            }
+
             numeroPosicion = numeroPosicion + 1;
-            contador += 1;
         }
     }
-    
+
     /**
      * Muestra solo las tareas en posiciones impares sin numero delante ni nada,
      * solo la tarea
@@ -129,7 +132,7 @@ public class Todoist {
             numeroPosicion = numeroPosicion + 1;
         }
     }
-    
+
     /**
      * Muestra por pantalla todas las tareas que contienen el texto indicado
      * como parámetro, una en cada línea, y además muestra un mensaje al final 
@@ -155,7 +158,7 @@ public class Todoist {
             System.out.println("El número de tareas coincidentes es " + numeroTareasCoincidentes);
         }
     }
-    
+
     /**
      * Muestra por pantalla la primera tarea que contenga el texto indicado como
      * parámetro. En caso de que no haya ninguna coincidencia no muestra nada.
@@ -169,7 +172,7 @@ public class Todoist {
             }
         }
     }
-    
+
     /**
      * Muestra por pantalla todas las tareas existentes, una por línea,
      * usando un bucle while
@@ -181,7 +184,7 @@ public class Todoist {
             posicionTareaActual += 1;
         }
     }
-    
+
     /**
      * Muestra las tareas numeradas usando un bucle while empezando en 1
      */
@@ -192,7 +195,7 @@ public class Todoist {
             posicionTarea += 1;
         }
     }
-    
+
     /**
      * Muestra por pantalla las primeras n tareas (siendo n un parametro). En
      * caso de que no haya suficientes tareas muestra solo las que haya.
@@ -204,7 +207,7 @@ public class Todoist {
             posicionTarea += 1;
         }
     }
-    
+
     /**
      * Devuelve true si hay al menos una tarea que contenga el texto indicado
      * como parámetro y false en caso contrario. El método se debe ejecutar de
@@ -223,7 +226,7 @@ public class Todoist {
         }
         return hayTareaCoincidente;
     }
-    
+
     /**
      * Elimina la primera tarea que contiene el texto indicado por parámetro
      */
@@ -231,7 +234,7 @@ public class Todoist {
         int contador = 0;
         String tarea = "";
         boolean tareaEliminada = false;
-        
+
         while(contador < tareas.size() && tareaEliminada == false) {
             tarea = tareas.get(contador);
             if(tarea == textoABuscar) {
@@ -241,14 +244,14 @@ public class Todoist {
             contador += 1;
         }
     }
-    
+
     /**
      * Elimina todas las tareas que contienen el texto a buscar
      */
     public void eliminarTodasTareasCoincidentes(String textoABuscar) {
         int contador = 0;
         String tarea = "";
-        
+
         while(contador < tareas.size()) {
             tarea = tareas.get(contador);
             if(tarea == textoABuscar) {
@@ -258,7 +261,7 @@ public class Todoist {
             contador += 1;
         }
     }
-    
+
     /**
      * Marca como completada la tarea indicada como parámetro. Por ejemplo,
      * si el parámetro es 0 marca como completada la primera tarea, si es 1 la
